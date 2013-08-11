@@ -1,4 +1,7 @@
 GetQQGroupMembers
 =================
+这是一个chrome 插件，处于开发阶段，只限于学习研究
 
-GetQQGroupMembers
+-----------------
+本插件用于获取QQ群成员列表QQ号码
+
