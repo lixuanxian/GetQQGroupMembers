@@ -1,0 +1,23 @@
+{
+    "name": "GetQQGroupMembers",
+    "version": "1.0.0",
+    "description": "Get QQ Group Members Tool.",
+    "icons": {
+        "128": "/images/icon128.png",
+        "16": "/images/icon16.png",
+        "48": "/images/icon48.png"
+    },
+    "permissions": ["tabs", "http://*/*", "https://*/*", "unlimitedStorage"],
+    "browser_action": {
+        "default_title": "GetQQGroupMembers",
+        "default_icon": "images/icon16.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+            "all_frames": false,
+            "js": ["js/jquery.GetQQGroupMembers.min.js", "js/jquery.cookie.js", "js/GetQQGroupMembers.js"],
+            "matches": ["http://qun.qzone.qq.com/group", "http://qun.qzone.qq.com/group*"],
+            "run_at": "document_end"
+        }],
+    "manifest_version": 2
+}
