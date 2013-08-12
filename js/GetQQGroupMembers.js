@@ -56,7 +56,7 @@ function handleGrouListWithList(groupList)
      $.each(items,function(index){
          var item = items[index];
         if(item.iscreator!=1 &&  item.ismanager!=1)   {
-           GroupMemberListContent += '\n'+item.uin+'@qq.com';
+           GroupMemberListContent += '\n'+item.uin+'@qq.com;';
          }
      });
      CountHandGroupNumber--;
