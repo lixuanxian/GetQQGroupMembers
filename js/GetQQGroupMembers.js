@@ -8,9 +8,10 @@ var QQUin = $(".user_ava img[class=avatar]").attr('uin');
  var GetQQGroupMembersURL = 'http://qun.qzone.qq.com/cgi-bin/get_group_member?neednum=1&r=0.4437826597131789&g_tk=437403321';
 //var GetQQGroupURL = 'http://qun.qzone.qq.com/cgi-bin/get_group_list?callbackFun=getQQGroup&uin=342494491&random=0.8364071836695075&g_tk=437403321&callbackFun=requestCallback';
   var GroupMemberListContent ="";
-  var  LastGroupID ='';//正在处理的id
-  var CountHandGroupNumber = 0;
+  var LastGroupID ='';//正在处理的id
+  var CountHandGroupNumber = 0;//总共的选择的QQ群的数目
   var FileName = '导出的QQ群成员邮箱';
+  var coutExportQQMembers = 0;//用来统计总共导出了多少个成员
 //
 
 $(document).ready(function() {
@@ -39,8 +40,10 @@ function Log(message){
 function handleGrouListWithList(groupList)
 {
     
-      GroupMemberListContent  = "";
+      GroupMemberListContent  = "";//把内容清空
+      coutExportQQMembers = 0;//把记录导出多少成员的计算器设置为 0 
       CountHandGroupNumber= groupList.length;
+      
        $.each(groupList,function(index){
             getQQGroupMemeberListWithAjax($(this).attr("data-groupid"));
          });
@@ -56,12 +59,14 @@ function handleGrouListWithList(groupList)
      $.each(items,function(index){
          var item = items[index];
         if(item.iscreator!=1 &&  item.ismanager!=1)   {
+           coutExportQQMembers++;
            GroupMemberListContent += '\n'+item.uin+'@qq.com;';
          }
      });
      CountHandGroupNumber--;
+     //当最后一个群被数据处理完成的时候，需要进行保持
      if(CountHandGroupNumber == 0) {
-           saveToTextFile(GroupMemberListContent,FileName);
+           saveToTextFile(GroupMemberListContent,FileName+'('+coutExportQQMembers+')');
        }
   }
 }
